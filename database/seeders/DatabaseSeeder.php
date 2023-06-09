@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\Vacancy;
+use Database\Factories\CompanyFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -38,7 +39,7 @@ class DatabaseSeeder extends Seeder
         $company = Company::factory(5)->create();
 
         Vacancy::factory(5)->create([
-            'companies_id' => $company->id,
+            'companies_id' => Company::all()->random(number:1)->first()->id,
         ]);
     }
 }

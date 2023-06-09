@@ -19,16 +19,16 @@ class VacancyFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->textsentence(),
+            'title' => $this->faker->jobTitle(),
             'companies_id'=> Company::factory(),
             'types_id'=> Type::all()->random(number:1)->first()->id,
             'address'=> $this->faker->address(),
-            'requirements'=>'<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
+            'requirements'=>$this->faker->paragraph(),
             'deletion_date'=>now(),
             'expedition_date' =>now(),
             'state' => 1,
-            'responsibilities'=>'<p>' . implode('</p><p>', $this->faker->paragraphs(1)) . '</p>',
-            'description'=>'<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
+            'responsibilities'=> $this->faker->paragraph(),
+            'description'=>$this->faker->paragraph(),
             'slug' => $this->faker->slug(),
         ];
     }

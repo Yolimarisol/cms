@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('deletion_date')->nullable();
             $table->integer('state');
             $table->text('responsibilities')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();
