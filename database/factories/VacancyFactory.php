@@ -21,7 +21,7 @@ class VacancyFactory extends Factory
         return [
             'title' => $this->faker->textsentence(),
             'companies_id'=> Company::factory(),
-            'types_id'=> Type::factory(),
+            'types_id'=> Type::all()->random(number:1)->first()->id,
             'address'=> $this->faker->address(),
             'requirements'=>'<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
             'deletion_date'=>now(),
