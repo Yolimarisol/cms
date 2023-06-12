@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/vacancies', 'VacancyController@index');
+
+Route::post('/vacancies', 'VacancyController@store');
