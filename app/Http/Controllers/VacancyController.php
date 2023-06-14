@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Vacancy;
 use Illuminate\Http\Request;
+use App\Http\Requests\NewVacancyRequest;
 
 class VacancyController extends Controller
 {
@@ -13,9 +14,9 @@ class VacancyController extends Controller
         return view('vacacies.index', compact('vacancies'));
     }
 
-    public function store ()
+    public function store (NewVacancyRequest $request)
     {
-        Vacancy::create(request([
+        $attributes = $request->validated([
             'companies_id',
             'title',
             'types_id',
@@ -27,7 +28,9 @@ class VacancyController extends Controller
             'responsibilities',
             'description',
             //'image',
-            'slug']));
+            'slug']);
+
+        Vacancy::create(request($attributes));
 
         return redirect('/vacancies');
     }
