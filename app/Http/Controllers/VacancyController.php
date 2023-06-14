@@ -38,7 +38,10 @@ class VacancyController extends Controller
             'slug',
             'created_at']);
 
-        Vacancy::create($attributes);
+        //$attributes['companies_id'] = auth()->id();
+       // Vacancy::create($attributes);
+
+        auth()->user()->vacancies()->create($attributes);
 
         return redirect('/vacancies');
     }

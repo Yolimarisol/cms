@@ -35,4 +35,4 @@ Route::get('/vacancies', 'VacancyController@index');
 
 Route::get('/vacancies/{vacancy}', 'VacancyController@show');
 
-Route::post('/vacancies', 'VacancyController@store');
+Route::post('/vacancies', 'VacancyController@store')->middleware('auth');
