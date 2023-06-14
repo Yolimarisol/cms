@@ -29,7 +29,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/vacancies', 'VacancyController@index');
-
-Route::post('/vacancies', 'VacancyController@store');
