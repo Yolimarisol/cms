@@ -43,7 +43,7 @@ class VacanciesTest extends TestCase
             },
             'types_id'=> function(){
                 return Type::factory()->create()->id;
-            },,
+            },
             'address'=> $this->faker->address(),
             'requirements'=>$this->faker->paragraph(),
             'expedition_date' =>now(),

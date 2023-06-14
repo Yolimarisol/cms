@@ -31,10 +31,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/vacancies', 'VacancyController@index');
+Route::get('/vacancies',  [VacancyController::class,'index']);
 
-Route::get('/vacancies/{vacancy}', 'VacancyController@show');
+Route::get('/vacancies/{vacancy}', [VacancyController::class,'show']);
 
-Route::get('/vacancies/create', 'VacacyController@create');
+Route::get('/vacancies/create',[VacancyController::class,'create']);
 
-Route::post('/vacancies', 'VacancyController@store')->middleware('auth');
+Route::post('/vacancies', [VacancyController::class,'store'])//->middleware('auth');

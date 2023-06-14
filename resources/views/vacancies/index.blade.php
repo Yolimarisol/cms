@@ -13,7 +13,7 @@
             <div class = "w-1/3 px-2.5 pb-6">
                 <div class = "bg-white p-5 rounded shadow he">
                     <h3 class = "py-6 ">{{$vacancy->title}}</h3>
-                    <div class = "text-grey">{{str_limit($vacancy->description, 150)}}</div>
+                    <div class = "text-grey">{{Str::limit($vacancy->description, 150)}}</div>
                 </div>
             </div>
         @empty
