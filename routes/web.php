@@ -18,3 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/vacancies', 'VacancyController@index');
+
+Route::post('/vacancies', 'VacancyController@store');
