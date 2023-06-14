@@ -15,4 +15,22 @@ class UserVacancy extends Model
         'users_id'
     ];
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(function(UserVacancy $userVacancy){
+            $userVacancy->user_id = auth()->id();
+        });
+    }
+
 }

@@ -16,15 +16,15 @@ return new class extends Migration
             $table->foreignId('companies_id')->constrained();
             $table->string('title');
             $table->foreignId('types_id')->constrained();
-            $table->string('address');
-            $table->text('requirements');
-            $table->date('expedition_date');
-            $table->date('deletion_date');
+            $table->string('address')->nullable();
+            $table->text('requirements')->nullable();
+            $table->date('expedition_date')->nullable();
+            $table->date('deletion_date')->nullable();
             $table->integer('state');
-            $table->text('responsibilities');
-            $table->string('description');
-            $table->string('image');
-            $table->string('slug');
+            $table->text('responsibilities')->nullable();
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
