@@ -11,7 +11,7 @@ class VacancyController extends Controller
     {
         $vacancies = Vacancy::all();
 
-        return view('vacacies.index', compact('vacancies'));
+        return view('vacancies.index', compact('vacancies'));
     }
 
     public function show(Vacancy $vacancy)

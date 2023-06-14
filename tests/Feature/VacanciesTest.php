@@ -17,6 +17,21 @@ class VacanciesTest extends TestCase
 
     /** @test */
 
+    public function guests_canot_manage_vacancies()
+    {
+        $vacancy = Vacancy::factory()->created();
+
+        $this->get('/vancacies')->assertRedirect('login');
+
+        $this->get('/vancacies/create')->assertRedirect('login');
+
+        $this->get($vacancy->path())->assertRedirect('login');
+
+        $this->get('/vancacies', $vacancy->toArray())->assertRedirect('login');
+    }
+
+    /** @test */
+
     public function a_user_can_create_a_vacancy()
     {
         $this->withoutExceptionHandling();
