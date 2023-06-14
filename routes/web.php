@@ -33,4 +33,6 @@ require __DIR__.'/auth.php';
 
 Route::get('/vacancies', 'VacancyController@index');
 
+Route::get('/vacancies/{vacancy}', 'VacancyController@show');
+
 Route::post('/vacancies', 'VacancyController@store');

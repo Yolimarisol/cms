@@ -28,7 +28,12 @@ class Vacancy extends Model
         'updated_at'
     ];
 
-    protected $perPage = 6;
+    //protected $perPage = 6;
+
+    public function path()
+    {
+        return "/vacancies/{$this->id}";
+    }
 
     public function getCreatedAtFormattedAttribute(): string
     {

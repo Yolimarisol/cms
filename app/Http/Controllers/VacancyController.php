@@ -7,14 +7,21 @@ use App\Http\Requests\NewVacancyRequest;
 
 class VacancyController extends Controller
 {
-    public function index ()
+    public function index()
     {
         $vacancies = Vacancy::all();
 
         return view('vacacies.index', compact('vacancies'));
     }
 
-    public function store (NewVacancyRequest $request)
+    public function show(Vacancy $vacancy)
+    {
+       // $vacancy = Vacancy::findOrFail(request('vacancy'));
+
+        return view('vacancy.show', compact('vacancy'));
+    }
+
+    public function store(NewVacancyRequest $request)
     {
         $attributes = $request->validated([
             'companies_id',

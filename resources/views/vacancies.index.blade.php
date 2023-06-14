@@ -9,10 +9,16 @@
     <h1>Vacancies</h1>
 
     <ul>
-        @foreach ($vacancies as $vacancy)
-        <li>{{$vacancy->title}}</li>
+        @forelse ( $vacancies as $vacancy)
+            <li>
+                <a href="{{$vacancy->path()}}">{{$vacancy->title}}</a>
+            </li>
+        @empty
+            <li>No vacancies yet.</li>
 
-        @endforeach
+        @endforelse
+
+
     </ul>
 
 </body>
