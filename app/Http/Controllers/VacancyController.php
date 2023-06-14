@@ -28,9 +28,10 @@ class VacancyController extends Controller
             'responsibilities',
             'description',
             //'image',
-            'slug']);
+            'slug',
+            'created_at']);
 
-        Vacancy::create(request($attributes));
+        Vacancy::create($attributes);
 
         return redirect('/vacancies');
     }
