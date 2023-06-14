@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>create a vacancy</title>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
-</head>
-<body>
-    <h1>Create a vacancy</h1>
+@extends ('layouts.app')
 
-    <form method = "POST"  action = "/vacancies" class = "container">
+@section('content')
+
+    <form method = "POST"  action = "/vacancies">
     @csrf
         <h1 class = "heading is-1">Create a vacancy</h1>
         <div class = "field">
@@ -41,12 +34,18 @@
         </div>
 
         <div class = "field">
+            <label class = "control" for = "address">Address</label>
+            <div class = "control">
+                <textarea name= "address" class= "textarea"></textarea>
+            </div>
+        </div>
+
+        <div class = "field">
             <div class = "control">
                 <button type= "sumit" class= "button is-link">Create a vacancy</button>
+                <a href="/vacancies">Cancel</a>
             </div>
         </div>
     </form>
 
-
-</body>
-</html>
+@endsection

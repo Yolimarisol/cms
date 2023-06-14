@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends ('layouts.app')
+
+@section('content')
+
     <h1>{{$vacancy->title}}</h1>
     <div>{{$vacancy->description}}</div>
+    <div>{{$vacancy->responsibilities}}</div>
+    <div>{{$vacancy->requirements}}</div>
+    <div>{{$vacancy->address}}</div>
+    <a href="/vacancies">Go back</a>
+@endsection
 
-
-</body>
-</html>

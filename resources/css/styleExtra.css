@@ -1,0 +1,10 @@
+.display
+{
+    display: flex;
+    align-items: center;
+}
+
+.mautor
+{
+    margin-right:auto;
+}

@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Vacancies</h1>
+@extends ('layouts.app')
 
+@section('content')
+    <div class= "display mb-3">
+        <h1 class = "mautor">Vacancies</h1>
+
+        <a href="/vacancies/create">Create a New Vacancy"</a>
+    </div>
     <ul>
         @forelse ( $vacancies as $vacancy)
             <li>
@@ -20,6 +18,5 @@
 
 
     </ul>
+@endsection
 
-</body>
-</html>
