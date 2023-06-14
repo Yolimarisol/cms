@@ -15,8 +15,8 @@ class TypeSeeder extends Seeder
     public function run(): void
     {
         Type::insert([
-            'name'=>'Part-time',
-            'name'=>'Full-time'
+            ['name'=>'Part-time'],
+            ['name'=>'Full-time']
         ]);
     }
 }

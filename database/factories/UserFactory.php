@@ -28,9 +28,7 @@ class UserFactory extends Factory
             'role' => rand(0,2),
             'privacy_policy'=>true,
             'position_company' => $this->faker->jobTitle(),
-            'companies_id'=> function(){
-                return Company::factory()->create()->id;
-            }
+            'companies_id'=> Company::all()->random(number:1)->first()->id
         ];
     }
 

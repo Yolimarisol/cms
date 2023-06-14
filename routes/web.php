@@ -37,4 +37,5 @@ Route::get('/vacancies/{vacancy}', [VacancyController::class,'show']);
 
 Route::get('/vacancies/create',[VacancyController::class,'create']);
 
-Route::post('/vacancies', [VacancyController::class,'store'])//->middleware('auth');
+Route::post('/vacancies', [VacancyController::class,'store']);//->middleware('auth');
+

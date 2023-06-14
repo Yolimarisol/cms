@@ -20,12 +20,8 @@ class VacancyFactory extends Factory
     {
         return [
             'title' => $this->faker->jobTitle(),
-            'companies_id'=> function(){
-                return Company::factory()->create()->id;
-            },
-            'types_id'=>function(){
-                return Type::factory()->create()->id;
-            },
+            'companies_id'=>Company::all()->random(number:1)->first()->id,
+            'types_id'=>Type::all()->random(number:1)->first()->id,
             'address'=> $this->faker->address(),
             'requirements'=>$this->faker->paragraph(),
             'deletion_date'=>now(),
