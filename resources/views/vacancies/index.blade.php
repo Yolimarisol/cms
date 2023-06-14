@@ -6,17 +6,18 @@
 
         <a href="/vacancies/create">Create a New Vacancy"</a>
     </div>
-    <ul>
+    <div class = "flex">
         @forelse ( $vacancies as $vacancy)
-            <li>
-                <a href="{{$vacancy->path()}}">{{$vacancy->title}}</a>
-            </li>
+            <div class = "bg-white mr-4 p-5 rounded shadow w-1/3 he">
+                <h3 class = "py-6">{{$vacancy->title}}</h3>
+                <div class = "text-grey">{{str_limit($vacancy->description, 150)}}</div>
+            </div>
         @empty
-            <li>No vacancies yet.</li>
+            <div>No vacancies yet.</div>
 
         @endforelse
 
 
-    </ul>
+    </div>
 @endsection
 
