@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 
 @section('content')
-    <header class="flex items-center mb-3 py-4">
+    <header class="flex  bg-red-500 items-center mb-3 py-4">
         <div class ="flex justify-between w-full items-center">
             <h1 class = "mautor">Vacancies</h1>
 
@@ -23,5 +23,15 @@
 
 
     </main>
+
+    {{-- <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+        @if ($vacancies->count())
+            <x-posts-grid :vacancies="$vacancies" />
+
+            {{ $vacancies->links() }}
+        @else
+            <p class="text-center">No vacancies yet. Please check back later.</p>
+        @endif
+    </main> --}}
 @endsection
 

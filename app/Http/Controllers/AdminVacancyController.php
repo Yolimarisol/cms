@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class AdminVacancyController extends Controller
 {
+    public function create()
+    {
+        return view('vacancies.create');
+    }
     public function store(NewVacancyRequest $request)
     {
         $attributes = $request->validated([

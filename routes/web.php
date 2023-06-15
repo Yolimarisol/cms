@@ -34,9 +34,13 @@ require __DIR__.'/auth.php';
 
 Route::get('/vacancies',  [VacancyController::class,'index']);
 
-Route::get('/vacancies/{vacancy:slug}', [VacancyController::class,'show']);
-
-Route::get('/vacancies/create',[VacancyController::class,'create']);
+Route::get('/vacancies/create',[AdminVacancyController::class,'create']);
 
 Route::post('/vacancies', [AdminVacancyController::class,'store']);//->middleware('auth');
+
+Route::get('/vacancies/{vacancy:slug}', [VacancyController::class,'show']);
+
+
+
+
 
