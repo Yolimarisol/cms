@@ -16,33 +16,14 @@ class VacancyController extends Controller
 
     public function show(Vacancy $vacancy)
     {
-       // $vacancy = Vacancy::findOrFail(request('vacancy'));
+        return view('vacancies.show', [
+            'vacancy' => $vacancy
+        ]);
+        
+        // $vacancy = Vacancy::findOrFail(request('vacancy'));
 
-        return view('vacancy.show', compact('vacancy'));
+        // return view('vacancies.show', compact('vacancies'));
     }
 
-    public function store(NewVacancyRequest $request)
-    {
-        $attributes = $request->validated([
-            'companies_id',
-            'title',
-            'types_id',
-            'address',
-            'requirements',
-            'deletion_date',
-            'expedition_date',
-            'state',
-            'responsibilities',
-            'description',
-            //'image',
-            'slug',
-            'created_at']);
 
-        //$attributes['companies_id'] = auth()->id();
-       // Vacancy::create($attributes);
-
-        auth()->user()->vacancies()->create($attributes);
-
-        return redirect('/vacancies');
-    }
 }

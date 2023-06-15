@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminVacancyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -33,9 +34,9 @@ require __DIR__.'/auth.php';
 
 Route::get('/vacancies',  [VacancyController::class,'index']);
 
-Route::get('/vacancies/{vacancy}', [VacancyController::class,'show']);
+Route::get('/vacancies/{vacancy:slug}', [VacancyController::class,'show']);
 
 Route::get('/vacancies/create',[VacancyController::class,'create']);
 
-Route::post('/vacancies', [VacancyController::class,'store']);//->middleware('auth');
+Route::post('/vacancies', [AdminVacancyController::class,'store']);//->middleware('auth');
 

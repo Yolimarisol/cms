@@ -16,6 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        \App\Models\Company::factory()->create([
+            'id'=>1,
+            'name' => 'ninguna',
+            'website' =>'',
+            'description' => '',
+            'members' => '',
+            'address' => 0,
+            'slug' => '',
+
+        ]);
         $company = Company::factory(5)->create();
 
         \App\Models\User::factory()->create([
