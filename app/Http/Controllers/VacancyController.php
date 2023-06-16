@@ -10,7 +10,7 @@ class VacancyController extends Controller
     public function index()
     {
         return view('vacancies.index', [
-            'vacancies' => Post::latest()->filter(
+            'vacancies' => Vacancy::latest()->filter(
                         request(['search', 'category', 'author'])
                     )->paginate(18)->withQueryString()
         ]);
