@@ -53,7 +53,7 @@
                         </form>
                     </x-dropdown>
                 @else
-                    <a href="/register"
+                    <a href="/auth/register"
                        class="text-xs font-bold uppercase {{ request()->is('register') ? 'text-blue-500' : '' }}">
                         Register
                     </a>
