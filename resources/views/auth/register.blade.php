@@ -28,7 +28,7 @@
                 <!-- Position Company -->
                 <div class= "mt-4">
                     <x-input-label for="position_company" :value="__('Position Company')" />
-                    <x-text-input  class="block mt-1 w-full" type="text" name="lastname" :value="old('position_company')" required autofocus autocomplete="position_company" />
+                    <x-text-input  class="block mt-1 w-full" type="text" name="position_company" :value="old('position_company')" required autofocus autocomplete="position_company" />
                     <x-input-error :messages="$errors->get('position_company')" class="mt-2" />
                 </div>
 
