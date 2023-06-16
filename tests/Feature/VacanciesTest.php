@@ -4,6 +4,9 @@ namespace Tests\Feature;
 
 use App\Models\Company;
 use App\Models\Type;
+use App\Models\User;
+use App\Models\Vacancy;
+use Database\Factories\VacancyFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +14,22 @@ use Tests\TestCase;
 
 class VacanciesTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
+    use WithFaker;
+
+    /** @test */
+
+    // public function guests_canot_manage_vacancies()
+    // {
+    //     $vacancy = Vacancy::factory()->created();
+
+    //     $this->get('/vancacies')->assertRedirect('login');
+
+    //     $this->get('/vancacies/create')->assertRedirect('login');
+
+    //     $this->get($vacancy->path())->assertRedirect('login');
+
+    //     $this->get('/vancacies', $vacancy->toArray())->assertRedirect('login');
+    // }
 
     /** @test */
 
@@ -19,19 +37,25 @@ class VacanciesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $attributes = [
-            'title' => $this->faker->jobTitle(),
-            'companies_id'=> Company::factory(),
-            'types_id'=> Type::all()->random(number:1)->first()->id,
-            'address'=> $this->faker->address(),
-            'requirements'=>$this->faker->paragraph(),
-            'expedition_date' =>now(),
-            'state' => 1,
-            'responsibilities'=> $this->faker->paragraph(),
-            'description'=>$this->faker->paragraph(),
-            'slug' => $this->faker->slug(),
-            'created_at' =>now(),
-        ];
+        $attributes= Vacancy::factory()->make()->toArray();
+
+        // $attributes = [
+        //     'title' => $this->faker->jobTitle(),
+        //     'companies_id'=> function(){
+        //         return Company::factory()->create()->id;
+        //     },
+        //     'types_id'=> function(){
+        //         return Type::factory()->create()->id;
+        //     },
+        //     'address'=> $this->faker->address(),
+        //     'requirements'=>$this->faker->paragraph(),
+        //     'expedition_date' =>now(),
+        //     'state' => 1,
+        //     'responsibilities'=> $this->faker->paragraph(),
+        //     'description'=>$this->faker->paragraph(),
+        //     'slug' => $this->faker->slug(),
+        //     'created_at' =>now(),
+        // ];
 
         $this->post('/vacancies', $attributes)->assertRedirect('/vacancies');
 
@@ -42,25 +66,51 @@ class VacanciesTest extends TestCase
 
     /** @test */
 
-    public function a_vacancy_requires_a_title()
+    public function only_authenticated_users_can_create_a_vacancy()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['title'=>'']);
-        $this->post('/vacancies', [$attributes])->assertSessionHasErrors('title');
+        $this->withoutExceptionHandling();
+        $attributes = Vacancy::factory()->raw();
+        $this->post('/vacancies', [$attributes])->assertRedirect('/login');
     }
 
     /** @test */
 
-    public function a_vacancy_requires_a_companies_id()
+    public function a_user_can_view_a_vacancy()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['companies_id'=>'integer']);
-        $this->post('/vacancies', [$attributes])->assertSessionHasErrors('companies_id');
+        $this->withoutExceptionHandling();
+
+        $vacancy = Vacancy::factory()->create();
+
+        $this->get($vacancy->path())
+            ->assertSee($vacancy->title)
+            ->assertSee($vacancy->companies_id)
+            ->assertSee($vacancy->types_id)
+            ->assertSee($vacancy->address)
+            ->assertSee($vacancy->requirements)
+            ->assertSee($vacancy->expedition_date)
+            ->assertSee($vacancy->state)
+            ->assertSee($vacancy->responsibilities)
+            ->assertSee($vacancy->description)
+            ->assertSee($vacancy->slug)
+            ->assertSee($vacancy->created_at);
+    }
+
+    /** @test */
+
+    public function a_vacancy_requires_a_title()
+    {
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['title'=>'']);
+        $this->post('/vacancies', [$attributes])->assertSessionHasErrors('title');
     }
 
     /** @test */
 
     public function a_vacancy_requires_a_types_id()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['types_id'=>'integer']);
+        $this->actingAs(User::factory()->create());
+        $this->withoutExceptionHandling();
+        $attributes = Vacancy::factory()->raw(['types_id'=>'integer']);
         $this->post('/vacancies', [])->assertSessionHasErrors('types_id');
     }
 
@@ -68,7 +118,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_address()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['address'=>'string']);
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['address'=>'string']);
         $this->post('/vacancies', [])->assertSessionHasErrors('address');
     }
 
@@ -76,7 +127,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_requirements()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['requirements'=>'text']);
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['requirements'=>'text']);
         $this->post('/vacancies', [])->assertSessionHasErrors('requirements');
     }
 
@@ -84,7 +136,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_expedition_date()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['expedition_date'=>'string']);
+        $this->actingAs(User::factory()->create());
+        $attributes =Vacancy::factory()->raw(['expedition_date'=>'string']);
         $this->post('/vacancies', [])->assertSessionHasErrors('expedition_date');
     }
 
@@ -92,7 +145,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_state()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['state'=>'integer']);
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['state'=>'integer']);
         $this->post('/vacancies', [])->assertSessionHasErrors('state');
     }
 
@@ -100,7 +154,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_responsibilities()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['responsibilities'=>'text']);
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['responsibilities'=>'text']);
         $this->post('/vacancies', [])->assertSessionHasErrors('responsibilities');
     }
 
@@ -108,7 +163,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_description()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['description'=>'string']);
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['description'=>'string']);
         $this->post('/vacancies', [])->assertSessionHasErrors('description');
     }
 
@@ -116,7 +172,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_slug()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['slug'=>'string']);
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['slug'=>'string']);
         $this->post('/vacancies', [])->assertSessionHasErrors('slug');
     }
 
@@ -124,7 +181,8 @@ class VacanciesTest extends TestCase
 
     public function a_vacancy_requires_a_created_at()
     {
-        $attributes = factory('App\Models\Vacancy')->raw(['created_at'=>'string']);
+        $this->actingAs(User::factory()->create());
+        $attributes = Vacancy::factory()->raw(['created_at'=>'string']);
         $this->post('/vacancies', [])->assertSessionHasErrors('created_at');
     }
 

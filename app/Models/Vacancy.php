@@ -28,7 +28,37 @@ class Vacancy extends Model
         'updated_at'
     ];
 
-    protected $perPage = 6;
+    //protected $perPage = 6;
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, fn($query, $search) =>
+            $query->where(fn($query) =>
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('address', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('resposabilities', 'like', '%' . $search . '%')
+                    ->orWhere('requirements', 'like', '%' . $search . '%')
+            )
+        );
+
+        $query->when($filters['type'] ?? false, fn($query, $type) =>
+            $query->whereHas('type_id', fn ($query) =>
+                $query->where('slug', $type)
+            )
+        );
+
+        $query->when($filters['company'] ?? false, fn($query, $company) =>
+            $query->whereHas('company_id', fn ($query) =>
+                $query->where('name', $company)
+            )
+        );
+    }
+
+    public function path()
+    {
+        return "/vacancies/{$this->id}";
+    }
 
     public function getCreatedAtFormattedAttribute(): string
     {

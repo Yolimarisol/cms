@@ -7,32 +7,25 @@ use App\Http\Requests\NewVacancyRequest;
 
 class VacancyController extends Controller
 {
-    public function index ()
+    public function index()
     {
-        $vacancies = Vacancy::all();
-
-        return view('vacacies.index', compact('vacancies'));
+        return view('vacancies.index', [
+            'vacancies' => Vacancy::latest()->filter(
+                        request(['search', 'category', 'author'])
+                    )->paginate(18)->withQueryString()
+        ]);
     }
 
-    public function store (NewVacancyRequest $request)
+    public function show(Vacancy $vacancy)
     {
-        $attributes = $request->validated([
-            'companies_id',
-            'title',
-            'types_id',
-            'address',
-            'requirements',
-            'deletion_date',
-            'expedition_date',
-            'state',
-            'responsibilities',
-            'description',
-            //'image',
-            'slug',
-            'created_at']);
+        return view('vacancies.show', [
+            'vacancy' => $vacancy
+        ]);
 
-        Vacancy::create($attributes);
+        // $vacancy = Vacancy::findOrFail(request('vacancy'));
 
-        return redirect('/vacancies');
+        // return view('vacancies.show', compact('vacancies'));
     }
+
+
 }

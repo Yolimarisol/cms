@@ -16,7 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        \App\Models\Company::factory()->create([
+            'id'=>0,
+            'name' => 'ninguna',
+            'website' =>'',
+            'description' => '',
+            'members' => '',
+            'address' => 0,
+            'slug' => '',
 
+        ]);
+        $company = Company::factory(5)->create();
 
         \App\Models\User::factory()->create([
             'name' => 'admin',
@@ -36,9 +46,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(class: TypeSeeder::class);
 
-        $company = Company::factory(5)->create();
-
-        Vacancy::factory(5)->create([
+        Vacancy::factory(15)->create([
             'companies_id' => Company::all()->random(number:1)->first()->id,
         ]);
     }

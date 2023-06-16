@@ -20,8 +20,8 @@ class VacancyFactory extends Factory
     {
         return [
             'title' => $this->faker->jobTitle(),
-            'companies_id'=> Company::factory(),
-            'types_id'=> Type::all()->random(number:1)->first()->id,
+            'companies_id'=>Company::all()->random(number:1)->first()->id,
+            'types_id'=>Type::all()->random(number:1)->first()->id,
             'address'=> $this->faker->address(),
             'requirements'=>$this->faker->paragraph(),
             'deletion_date'=>now(),
@@ -29,7 +29,7 @@ class VacancyFactory extends Factory
             'state' => 1,
             'responsibilities'=> $this->faker->paragraph(),
             'description'=>$this->faker->paragraph(),
-            'slug' => $this->faker->slug(),
+            'slug' => $this->faker->unique()->slug(),
         ];
     }
 }

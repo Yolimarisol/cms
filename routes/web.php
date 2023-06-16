@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminVacancyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,6 +32,15 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/vacancies', 'VacancyController@index');
+Route::get('/',  [VacancyController::class,'index'])->name('home');
 
-Route::post('/vacancies', 'VacancyController@store');
+Route::get('/vacancies/create',[AdminVacancyController::class,'create']);
+
+Route::post('/vacancies', [AdminVacancyController::class,'store']);//->middleware('auth');
+
+Route::get('/vacancies/{vacancy:slug}', [VacancyController::class,'show']);
+
+
+
+
+
