@@ -29,7 +29,7 @@ class VacancyFactory extends Factory
             'state' => 1,
             'responsibilities'=> $this->faker->paragraph(),
             'description'=>$this->faker->paragraph(),
-            'slug' => $this->faker->slug(),
+            'slug' => $this->faker->unique()->slug(),
         ];
     }
 }
