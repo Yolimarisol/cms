@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\NewUserRequest;
+use App\Http\Requests\NewUsersRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -29,20 +29,15 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(NewUserRequest $request): RedirectResponse
+    public function store(NewUsersRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name',
-            'email',
-            'password' ,
-        ]);
-
+        $request->validated();
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'position_company'=>$request->position_company,
-            'privacy_policy'=>$request->privacy_policy,
+            'privacy_policy'=>true,
             'companies_id'=>1,
             'role'=>2,
         ]);

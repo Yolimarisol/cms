@@ -9,7 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class UserVacancy extends Model
 {
     use HasFactory;
-
+    /**
+ * The table associated with the model.
+ *
+ * @var string
+ */
+    protected $table='users_vacancies';
     protected $fillable = [
         'companies_id',
         'users_id'

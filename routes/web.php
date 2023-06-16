@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminVacancyController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::post('/vacancies', [AdminVacancyController::class,'store']);//->middlewar
 
 Route::get('/vacancies/{vacancy:slug}', [VacancyController::class,'show']);
 
+Route::get('register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
 
 

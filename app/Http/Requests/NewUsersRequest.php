@@ -2,16 +2,17 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewUserRequest extends FormRequest
+class NewUsersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,10 +30,8 @@ class NewUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:48'],
         'lastname'=> ['required', 'string', 'max:48'],
-        'email' => ['required', 'string','rfc', 'email', 'max:255', 'unique:'.User::class],
+        'email' => ['required', 'string', 'email:rfc', 'max:255', 'unique:'.User::class],
         'password'=> ['required', 'confirmed','min:7','max:255'],
-        'privacy_policy',
-        'position_company',
         ];
     }
 }
