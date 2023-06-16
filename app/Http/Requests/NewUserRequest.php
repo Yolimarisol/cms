@@ -29,7 +29,7 @@ class NewUserRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:48'],
         'lastname'=> ['required', 'string', 'max:48'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+        'email' => ['required', 'string','rfc', 'email', 'max:255', 'unique:'.User::class],
         'password'=> ['required', 'confirmed','min:7','max:255'],
         'privacy_policy',
         'position_company',

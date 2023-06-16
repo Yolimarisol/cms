@@ -44,3 +44,4 @@ Route::get('/vacancies/{vacancy:slug}', [VacancyController::class,'show']);
 
 
 
+
