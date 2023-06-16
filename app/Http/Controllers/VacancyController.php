@@ -9,9 +9,11 @@ class VacancyController extends Controller
 {
     public function index()
     {
-        $vacancies = Vacancy::all();
-
-        return view('vacancies.index', compact('vacancies'));
+        return view('vacancies.index', [
+            'vacancies' => Post::latest()->filter(
+                        request(['search', 'category', 'author'])
+                    )->paginate(18)->withQueryString()
+        ]);
     }
 
     public function show(Vacancy $vacancy)
@@ -19,7 +21,7 @@ class VacancyController extends Controller
         return view('vacancies.show', [
             'vacancy' => $vacancy
         ]);
-        
+
         // $vacancy = Vacancy::findOrFail(request('vacancy'));
 
         // return view('vacancies.show', compact('vacancies'));
