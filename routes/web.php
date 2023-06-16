@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminVacancyController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,6 +36,11 @@ Route::get('/vacancies/create',[AdminVacancyController::class,'create']);
 Route::post('/vacancies', [AdminVacancyController::class,'store']);//->middleware('auth');
 
 Route::get('/vacancies/{vacancy:slug}', [VacancyController::class,'show']);
+
+Route::get('register', [RegisteredUserController::class, 'create'])
+                ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
 
 

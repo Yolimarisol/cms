@@ -11,8 +11,8 @@ class VacancyController extends Controller
     {
         return view('vacancies.index', [
             'vacancies' => Vacancy::latest()->filter(
-                        request(['search', 'category', 'author'])
-                    )->paginate(18)->withQueryString()
+                        request(['search', 'type', 'company'])
+                    )->paginate(9)->withQueryString()
         ]);
     }
 
